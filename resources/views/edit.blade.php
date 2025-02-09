@@ -29,7 +29,7 @@
             <label for="posted_by">Posted By</label>
             <select class="form-control" id="posted_by" name="posted_by" required>
                 @foreach ($users as $user)
-                    <option value="{{ $user->name }}" {{ $user->name == $post['posted_by'] ? 'selected' : '' }}>{{ $user->name }}</option>
+                    <option value="{{ $user->id }}" {{ $user->id == $post['posted_by'] ? 'selected' : '' }}>{{ $user->name }}</option>
                 @endforeach
             </select>
         </div>

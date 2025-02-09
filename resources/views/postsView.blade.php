@@ -23,7 +23,7 @@
                 <tr>
                     <td>{{ $post['id'] }}</td>
                     <td>{{ $post['title'] }}</td>
-                    <td>{{ $post['posted_by'] }}</td>
+                    <td>{{ $post->user->name }}</td>
                     <td>{{ $post['body'] }}</td>
                     <td>{{ Carbon::parse($post['created_at'])->format('Y-d-m') }}</td>
                     <td>
