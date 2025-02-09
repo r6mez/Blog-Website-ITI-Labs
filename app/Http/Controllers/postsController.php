@@ -1,7 +1,8 @@
 <?php
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
-use App\Models\Post; 
+use App\Models\Post;
+use App\Models\User; // Import the User model
 
 class postsController extends Controller
 {
@@ -21,7 +22,8 @@ class postsController extends Controller
     }
 
     public function create(){
-        return view('create');
+        $users = User::all(); // Get all users
+        return view('create', ['users' => $users]);
     }
 
     public function store(Request $request){
@@ -57,7 +59,8 @@ class postsController extends Controller
         if (!$post) {
             return redirect()->route('posts.index')->withErrors(['Post not found.']);
         }
-        return view('edit', ['post' => $post]);
+        $users = User::all(); // Get all users
+        return view('edit', ['post' => $post, 'users' => $users]);
     }
 
     public function update(Request $request, $id)

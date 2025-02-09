@@ -26,7 +26,11 @@
         </div>
         <div class="form-group">
             <label for="posted_by">Posted By</label>
-            <input type="text" class="form-control" id="posted_by" name="posted_by" required>
+            <select class="form-control" id="posted_by" name="posted_by" required>
+                @foreach ($users as $user)
+                    <option value="{{ $user->name }}">{{ $user->name }}</option>
+                @endforeach
+            </select>
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
