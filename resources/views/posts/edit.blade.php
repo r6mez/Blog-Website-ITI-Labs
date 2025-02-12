@@ -34,6 +34,7 @@
             <label for="image">Image</label>
             <input type="file" class="form-control" id="image" name="image">
             @if($post->image)
+                <br>
                 <img src="{{ url('storage/' . $post->image) }}" alt="Post Image" width="100">
             @endif
         </div>

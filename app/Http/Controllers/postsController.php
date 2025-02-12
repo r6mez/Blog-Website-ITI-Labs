@@ -53,9 +53,7 @@ class postsController extends Controller
         if ($post->posted_by != auth()->id()) {
             return redirect()->route('unauthorized');
         }
-        if ($post->image) {
-            Storage::disk('public')->delete($post->image);
-        }
+
         $post->delete();
         return redirect()->route('posts.index');
     }
