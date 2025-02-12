@@ -14,9 +14,10 @@ class UpdatePostRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required|string|min:3|unique:posts,title,' . $this->route('post'),
+            'title' => 'required|string|min:3,' . $this->route('post'),
             'body' => 'required|string|min:10',
             'posted_by' => 'required|exists:users,id',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ];
     }
 }

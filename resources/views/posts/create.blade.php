@@ -4,6 +4,11 @@
 
 @section('content')
     <h1 class="mb-4">Create Post</h1>
+    <div class="card mb-3">
+        <div class="card-body">
+            <p class="text-muted mb-0">Creating post as: <strong>{{ Auth::user()->name }}</strong></p>
+        </div>
+    </div>
     @if ($errors->any())
         <div class="alert alert-danger">
             <strong>Error</strong>
@@ -14,7 +19,7 @@
             </ul>
         </div>
     @endif
-    <form action="{{ route('posts.store') }}" method="POST">
+    <form action="{{ route('posts.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="form-group">
             <label for="title">Title</label>
@@ -25,13 +30,10 @@
             <textarea class="form-control" id="body" name="body" rows="3" required></textarea>
         </div>
         <div class="form-group">
-            <label for="posted_by">Posted By</label>
-            <select class="form-control" id="posted_by" name="posted_by" required>
-                @foreach ($users as $user)
-                    <option value="{{ $user->id }}">{{ $user->name }}</option>
-                @endforeach
-            </select>
+            <label for="image">Image</label>
+            <input type="file" class="form-control" id="image" name="image">
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <input type="hidden" name="posted_by" value="{{ auth()->user()->id }}">
+        <button type="submit" class="btn btn-primary mt-3">Submit</button>
     </form>
 @endsection

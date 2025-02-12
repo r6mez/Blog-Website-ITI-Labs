@@ -4,6 +4,11 @@
 
 @section('content')
     <h1 class="mb-4">Edit Post</h1>
+    <div class="card mb-3">
+        <div class="card-body">
+            <p class="text-muted mb-0">Editing post as: <strong>{{ Auth::user()->name }}</strong></p>
+        </div>
+    </div>
     @if ($errors->any())
         <div class="alert alert-danger">
             <strong>Error</strong>
@@ -14,7 +19,7 @@
             </ul>
         </div>
     @endif
-    <form action="{{ route('posts.update', $post['id']) }}" method="POST">
+    <form action="{{ route('posts.update', $post['id']) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
         <div class="form-group">
@@ -26,13 +31,15 @@
             <textarea class="form-control" id="body" name="body" rows="3" required>{{ $post['body'] }}</textarea>
         </div>
         <div class="form-group">
-            <label for="posted_by">Posted By</label>
-            <select class="form-control" id="posted_by" name="posted_by" required>
-                @foreach ($users as $user)
-                    <option value="{{ $user->id }}" {{ $user->id == $post['posted_by'] ? 'selected' : '' }}>{{ $user->name }}</option>
-                @endforeach
-            </select>
+            <label for="image">Image</label>
+            <input type="file" class="form-control" id="image" name="image">
+            @if($post->image)
+                <img src="{{ url('storage/' . $post->image) }}" alt="Post Image" width="100">
+            @endif
         </div>
-        <button type="submit" class="btn btn-primary">Update</button>
+        <input type="hidden" name="posted_by" value="{{ Auth::user()->id }}">
+        @if ($post->posted_by == auth()->id())
+            <button type="submit" class="btn btn-primary mt-3">Update</button>
+        @endif
     </form>
 @endsection
