@@ -9,7 +9,7 @@ use Carbon\Carbon;
 
 class Post extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, SoftDeletes, Sluggable;
 
     protected $fillable = [
         'title',
@@ -28,6 +28,15 @@ class Post extends Model
     public function getHumanReadableDateAttribute()
     {
         return Carbon::parse($this->created_at)->diffForHumans();
+    }
+
+    public function sluggable(): array
+    {
+        return [
+            'slug' => [
+                'source' => 'title'
+            ]
+        ];
     }
 }
 

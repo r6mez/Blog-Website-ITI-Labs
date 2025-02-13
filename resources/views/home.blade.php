@@ -12,6 +12,7 @@
         <tr>
             <th>ID</th>
             <th>Title</th>
+            <th>Slug</th>
             <th>Posted By</th>
             <th>Body</th>
             <th>Image</th>
@@ -24,6 +25,7 @@
             <tr>
                 <td>{{ $post['id'] }}</td>
                 <td>{{ $post['title'] }}</td>
+                <td>{{ $post['slug'] }}</td>
                 <td>{{ $post->user->name }}</td>
                 <td>{{ $post['body'] }}</td>
                 <td>
